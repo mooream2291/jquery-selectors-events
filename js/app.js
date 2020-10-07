@@ -2,6 +2,21 @@
 
 let imageArr = [];
 
+Horn.prototype.render = function() {
+
+  //html is a native function//
+
+  const template = $('#photo-template').html();
+  const newSection = $(`<section class= ${this.keyword}></section>`);
+  newSection.html(template);
+  //find is a native function to target an html element//
+  newSection.find('h2').text(this.title);
+  newSection.find('img').attr('src', this.image_url);
+  newSection.find('p').text(this.description);
+
+  $('main').append(newSection);
+};
+
 $(document).ready(function() {
 
   $.ajax('data/page-1.json')
@@ -12,25 +27,9 @@ $(document).ready(function() {
       });
       keyword();
       dropdown();
-      // $('.remove').hide();
+      $('.remove').hide();
     });
 });
-
-Horn.prototype.render = function() {
-
-  //html is a native function//
-
-  const template = $('#photo-template').html();
-  const newSection = $('<section></section>');
-  newSection.html(template);
-  //find is a native function to target an html element//
-  newSection.find('h2').text(this.title);
-  newSection.find('img').attr('src', this.image_url);
-  newSection.find('p').text(this.description);
-
-  $('main').append(newSection);
-};
-
 let keywordArr = [];
 
 function keyword() {
@@ -57,7 +56,7 @@ $('select').on('change',(event) => {
   let newval = event.target.value;
   console.log(newval);
   $('section').hide();
-  $('.dragon').show();
+  $(`.${newval}`).show();
 });
 
 function Horn (horn) {
