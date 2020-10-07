@@ -2,34 +2,52 @@
 
 let imageArr = [];
 
-Horn.prototype.render = function() {
+// Horn.prototype.render = function() {
 
-  //html is a native function//
+//   //html is a native function//
 
-  const template = $('#photo-template').html();
-  const newSection = $(`<section class= ${this.keyword}></section>`);
-  newSection.html(template);
-  //find is a native function to target an html element//
-  newSection.find('h2').text(this.title);
-  newSection.find('img').attr('src', this.image_url);
-  newSection.find('p').text(this.description);
+//   const template = $('#photo-template').html();
+//   const newSection = $(`<section class= ${this.keyword}></section>`);
+//   newSection.html(template);
+//   //find is a native function to target an html element//
+//   newSection.find('h2').text(this.title);
+//   newSection.find('img').attr('src', this.image_url);
+//   newSection.find('p').text(this.description);
 
-  $('main').append(newSection);
-};
+//   $('main').append(newSection);
+// };
+function renderCreature(horn) {
+  let template = $(`#${'creature-template'}`).html();
+  let markUp = Mustache.render(template, horn);
+  $(`#${'flexcontainer'}`).append(markUp);
+}
+$(document).ready(pageSelect(1));
+function pageSelect(pageNum) {
 
-$(document).ready(function() {
+  $.ajax(`data/page-${pageNum}.json`)
 
-  $.ajax('data/page-1.json')
+  //'change' = type of event we are listening for//
     .then (getHorn => {
       //creature is naming each individual object//
       getHorn.forEach((creature) => {
-        new Horn(creature).render();
+        let each = new Horn(creature);
+        renderCreature(each);
       });
       keyword();
       dropdown();
-      $('.remove').hide();
+      // $('.remove').hide();
     });
+}
+
+$('#pages').on('change',(event) => {
+  let newPage = event.target.value;
+  let pageNum = newPage;
+  pageSelect(pageNum);
+  $('section').remove();
+  renderCreature();
+  console.log(newPage);
 });
+
 let keywordArr = [];
 
 function keyword() {
@@ -38,6 +56,7 @@ function keyword() {
     if (!keywordArr.includes(value.keyword)) {
       keywordArr.push(value.keyword);
     };
+
 
   });
 };
