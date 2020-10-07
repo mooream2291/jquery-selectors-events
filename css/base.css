@@ -1,21 +1,21 @@
 *{
     box-sizing: border-box;
+    font-family: 'Noto Serif', serif;
 }
-#photo-template {
-    max-width: 950px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column wrap;
-    align-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 1rem;
-    padding:auto;
-  }
-  
+section{
+    float:left;
+}
 img{
     width:250px;
     height:300px;
-    margin: 1rem;
+    margin: 0px;
+}
+p{
+    width:300px;
+    margin:0px;
+    padding:0px;
+}
+footer{
+    clear: both;
+    margin-top: 0px;
 }
