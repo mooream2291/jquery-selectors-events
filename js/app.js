@@ -28,6 +28,7 @@ function pageSelect(pageNum) {
 
   //'change' = type of event we are listening for//
     .then (getHorn => {
+      getHorn.sort((a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
       //creature is naming each individual object//
       getHorn.forEach((creature) => {
         let each = new Horn(creature);
@@ -76,6 +77,25 @@ $('select').on('change',(event) => {
   console.log(newval);
   $('section').hide();
   $(`.${newval}`).show();
+});
+
+$('#sorting').on('change',(event) => {
+  let newSort = event.target.value;
+  if (newSort === 'horns') {
+    $('section').remove();
+    let sorted = imageArr.sort(function(a,b) {return a.horns - b.horns});
+    sorted.forEach(creature => {
+      renderCreature(creature);
+    });
+    $('section').show();
+  }
+  else if (newSort === 'title') {
+    $('section').remove();
+    imageArr.sort((a,b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+    imageArr.forEach(creature => {renderCreature(creature);
+    });
+    $('section').show();
+  }
 });
 
 function Horn (horn) {
