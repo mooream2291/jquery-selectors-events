@@ -2,6 +2,7 @@
 
 This application displays a series of images related to horned creatures (rela and fictional). The user can select a keyword from the dropdown to sort the images to display only those images associated to the descriptive keyword. 
 
+
 ## pagination, flexbox, mustache
 
 Number and name of feature: feature 1- pagination
@@ -33,3 +34,4 @@ Start time:
 Finish time: 
 
 Actual time needed to complete: 
+
